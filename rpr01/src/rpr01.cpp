@@ -30,7 +30,7 @@ int main( int argc, char **argv )
 	cout << "Færdig!" << endl;
 	
 	gpio4->setval_gpio( "1" ); // Tænd for de røde LED
-	sleep( 10 );
+	sleep( 3 );
 	gpio4->setval_gpio( "0" ); // Sluk for de røde LED
 	
 	cout << "Afeksportere GPIO pins... ";
