@@ -1,3 +1,5 @@
-bin_PROGRAMS=rpr01
+bin_PROGRAMS=rpr01 direct
+
 rpr01_SOURCES=rpr01.cpp GPIO.cpp
 
+direct_SOURCES=direct_io_test.cpp
