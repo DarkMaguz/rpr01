@@ -20,7 +20,7 @@ int main( int argc, char **argv )
 {
 	
 	GPIO gpio; // Lav et nyt GPIO object med tilknytning til GPIO4(PIN 7) den røde LED
-	const int pin = 7;
+	const int pin = 12;
 	
 	cout << "Sætter GPIO pin retningen... ";
 	cout.flush();
