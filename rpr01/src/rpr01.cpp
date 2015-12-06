@@ -27,8 +27,8 @@ int main( int argc, char **argv )
 	cout << "Færdig!" << endl;
 	
 	gpio.SetHigh( pin ); // Tænd for de røde LED
-	//sleep( 3 );
-	//gpio.SetLow( pin ); // Sluk for de røde LED
+	sleep( 1 );
+	gpio.SetLow( pin ); // Sluk for de røde LED
 	
 	cout << "Færdig!" << endl;
 	cout << "Afslutter programmet..." << endl;
