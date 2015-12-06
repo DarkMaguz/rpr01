@@ -23,6 +23,7 @@ int main( int argc, char **argv )
 	
 	cout << "Sætter GPIO pin retningen... ";
 	cout.flush();
+	cout << gpio.GetState( 4 ) << endl;
 	gpio.SetAsOutput( pin ); // GPIO4(PIN 7) sat som output pin
 	cout << "Færdig!" << endl;
 	
