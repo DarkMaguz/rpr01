@@ -118,8 +118,7 @@ int RaspPiGPIO::GetState( const int &pin ) const
 {
 	
 	int r = *( m_gpio + ( pin / 10 ) ) & ~( 7 << ( ( pin % 10 ) * 3 ) );
-	r = r << 29;
-	r = r >> 29;
+	
 	return r;
 }
 
