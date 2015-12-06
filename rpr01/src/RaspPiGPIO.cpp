@@ -116,7 +116,7 @@ void RaspPiGPIO::SetAsAlterateFunction( const int &pin, const int &alt )
 
 int RaspPiGPIO::GetState( const int &pin ) const
 {
-	return *( m_gpio + ( pin / 10 ) ) & ~( 7 << ( ( pin % 10 ) * 3 ) );
+	return *( m_gpio + ( pin / 10 ) ) & ( 7 << ( ( pin % 10 ) * 3 ) );
 }
 
 // *(gpio.addr + 7) = 1 << pin
