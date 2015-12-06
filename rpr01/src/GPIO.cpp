@@ -40,7 +40,7 @@ GPIO::GPIO()
 	}
 	
 	// Access memory map to the GPIO.
-	m_gpio = (volatile unsigned *)mmap(
+	gpio_map = (volatile unsigned *)mmap(
 	NULL, 											//Any adddress in our space will do
 	BLOCK_SIZE,								//Map length
 	PROT_READ | PROT_WRITE, 	// Enable reading & writting to mapped memory
@@ -50,11 +50,13 @@ GPIO::GPIO()
 	);
 	
 	// Test for failure.
-	if ( m_gpio == MAP_FAILED )
+	if ( gpio_map == MAP_FAILED )
 	{
 		perror( "mmap faild to access memory map to the GPIO: " );
 		exit( -1 );
 	}
+	
+	m_gpio = (volatile unsigned *)gpio_map;
 	
 //	// Access memory map to the PWM.
 //	m_pwm = (volatile unsigned *)mmap(
@@ -87,12 +89,14 @@ GPIO::~GPIO()
 	
 }
 
+// #define INP_GPIO(g) *(gpio         + ((g)/10)) &= ~(7<<(((g)%10)*3))
 // #define INP_GPIO(g) *(gpio.addr + ((g)/10)) &= ~(7<<(((g)%10)*3))
 void GPIO::SetAsInput( const int &pin )
 {
 	*( m_gpio + ( pin / 10 ) ) &= ~( 7 << ( ( pin % 10 ) * 3 ) );
 }
 
+// #define OUT_GPIO(g) *(gpio           + ((g)/10)) |=  (1<<(((g)%10)*3))
 // #define OUT_GPIO(g)   *(gpio.addr + ((g)/10)) |=  (1<<(((g)%10)*3))
 void GPIO::SetAsOutput( const int &pin )
 {
