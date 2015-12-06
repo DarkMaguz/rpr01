@@ -118,8 +118,16 @@ int RaspPiGPIO::GetState( const int &pin ) const
 {
 	
 	int r = *( m_gpio + ( pin / 10 ) ) & ~( 7 << ( ( pin % 10 ) * 3 ) );
+	int r2 = 0;
 	
-	return r;
+	for ( int i = 0; i < 3; i++ )
+	{
+		r2 = r % 2;
+		r2 <<= 1;
+		r /= 2;
+	}
+	
+	return r2;
 }
 
 // *(gpio.addr + 7) = 1 << pin
