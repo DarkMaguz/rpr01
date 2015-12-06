@@ -8,7 +8,7 @@
 #ifndef RPIO_H_
 #define RPIO_H_
 
-#include "GPIO.h"
+#include "RaspPiGPIO.h"
 
 class RpIO
 {
@@ -17,7 +17,7 @@ class RpIO
 		virtual ~RpIO();
 		
 	private:
-		GPIO& getGPIO( void );
+		RaspPiGPIO& getGPIO( void );
 		
 		int m_gpioPin;
 		

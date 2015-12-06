@@ -11,15 +11,14 @@
 #include <iostream>
 #include <unistd.h>
 
-#include "RpIO.h"
-#include "GPIO.h"
+#include "RaspPiGPIO.h"
 
 using namespace std;
 
 int main( int argc, char **argv )
 {
 	
-	GPIO gpio; // Lav et nyt GPIO object med tilknytning til GPIO4(PIN 7) den røde LED
+	RaspPiGPIO gpio; // Lav et nyt GPIO object med tilknytning til GPIO4(PIN 7) den røde LED
 	const int pin = 4;
 	
 	cout << "Sætter GPIO pin retningen... ";
@@ -28,8 +27,8 @@ int main( int argc, char **argv )
 	cout << "Færdig!" << endl;
 	
 	gpio.SetHigh( pin ); // Tænd for de røde LED
-	sleep( 3 );
-	gpio.SetLow( pin ); // Sluk for de røde LED
+	//sleep( 3 );
+	//gpio.SetLow( pin ); // Sluk for de røde LED
 	
 	cout << "Færdig!" << endl;
 	cout << "Afslutter programmet..." << endl;

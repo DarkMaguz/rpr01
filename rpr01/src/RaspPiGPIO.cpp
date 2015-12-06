@@ -5,7 +5,7 @@
  *      Author: magnus
  */
 
-#include <GPIO.h>
+#include "RaspPiGPIO.h"
 
 #define PI_VERSION 2
 
@@ -29,7 +29,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-GPIO::GPIO()
+RaspPiGPIO::RaspPiGPIO()
 {
 	
 	// Open /dev/mem.
@@ -75,7 +75,7 @@ GPIO::GPIO()
 	
 }
 
-GPIO::~GPIO()
+RaspPiGPIO::~RaspPiGPIO()
 {
 	
 	// Unmap I/O access.
@@ -89,14 +89,14 @@ GPIO::~GPIO()
 
 // #define INP_GPIO(g) *(gpio         + ((g)/10)) &= ~(7<<(((g)%10)*3))
 // #define INP_GPIO(g) *(gpio.addr + ((g)/10)) &= ~(7<<(((g)%10)*3))
-void GPIO::SetAsInput( const int &pin )
+void RaspPiGPIO::SetAsInput( const int &pin )
 {
 	*( m_gpio + ( pin / 10 ) ) &= ~( 7 << ( ( pin % 10 ) * 3 ) );
 }
 
 // #define OUT_GPIO(g) *(gpio           + ((g)/10)) |=  (1<<(((g)%10)*3))
 // #define OUT_GPIO(g)   *(gpio.addr + ((g)/10)) |=  (1<<(((g)%10)*3))
-void GPIO::SetAsOutput( const int &pin )
+void RaspPiGPIO::SetAsOutput( const int &pin )
 {
 	// First we have to clear the register so we are sure that all 3 bits are zero.
 	SetAsInput( pin );
@@ -104,7 +104,7 @@ void GPIO::SetAsOutput( const int &pin )
 }
 
 // #define SET_GPIO_ALT(g,a) *(gpio.addr + (((g)/10))) |= (((a)<=3?(a) + 4:(a)==4?3:2)<<(((g)%10)*3))
-void GPIO::SetAsAlterateFunction( const int &pin, const int &alt )
+void RaspPiGPIO::SetAsAlterateFunction( const int &pin, const int &alt )
 {
 	// First we have to clear the register so we are sure that all 3 bits are zero.
 	SetAsInput( pin );
@@ -112,18 +112,18 @@ void GPIO::SetAsAlterateFunction( const int &pin, const int &alt )
 }
 
 // *(gpio.addr + 7) = 1 << pin
-void GPIO::SetHigh( const int &pin )
+void RaspPiGPIO::SetHigh( const int &pin )
 {
 	*( m_gpio + 7 ) = 1 << pin;
 }
 
-void GPIO::SetLow( const int &pin )
+void RaspPiGPIO::SetLow( const int &pin )
 {
 	*( m_gpio + 10 ) = 1 << pin;
 }
 
 // #define GPIO_READ(g)  *(gpio.addr + 13) &= (1<<(g))
-bool GPIO::GetValue( const int &pin ) const
+bool RaspPiGPIO::GetValue( const int &pin ) const
 {
 	return *( m_gpio + 13 ) & ( 1 << pin );
 }

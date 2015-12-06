@@ -5,10 +5,10 @@
  *      Author: magnus
  */
 
+#include <RaspPiGPIO.h>
 #include <iostream>
 
 #include "RpIO.h"
-#include "GPIO.h"
 
 RpIO::RpIO( int gpioPin ) :
 	m_gpioPin( gpioPin )
@@ -19,8 +19,8 @@ RpIO::~RpIO()
 {
 }
 
-GPIO& RpIO::getGPIO( void )
+RaspPiGPIO& RpIO::getGPIO( void )
 {
-	static GPIO gpio;
+	static RaspPiGPIO gpio;
 	return gpio;
 }

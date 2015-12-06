@@ -5,14 +5,14 @@
  *      Author: magnus
  */
 
-#ifndef GPIO_H_
-#define GPIO_H_
+#ifndef RASPPIGPIO_H_
+#define RASPPIGPIO_H_
 
-class GPIO
+class RaspPiGPIO
 {
 	public:
-		GPIO();
-		virtual ~GPIO();
+		RaspPiGPIO();
+		virtual ~RaspPiGPIO();
 		
 		void SetAsInput( const int &pin );
 		void SetAsOutput( const int &pin );
@@ -31,4 +31,4 @@ class GPIO
 		
 };
 
-#endif /* GPIO_H_ */
+#endif /* RASPPIGPIO_H_ */
