@@ -129,6 +129,11 @@ int RaspPiGPIO::GetState( const int &pin ) const
 		}
 		std::cout << "*";
 	}
+	
+	std::cout << (r % 2); 
+	r /= 2;
+	std::cout << (r % 2); 
+	
 	std::cout << "\n";
 	
 	return r;
