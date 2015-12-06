@@ -26,7 +26,6 @@ class GPIO
 		int m_mem_fd;
 		
 		// I/O access.
-		void *gpio_map;
 		volatile unsigned *m_gpio;
 		//volatile unsigned *m_pwm;
 		
