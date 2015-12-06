@@ -28,6 +28,7 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <unistd.h>
+#include <iostream>
 
 RaspPiGPIO::RaspPiGPIO()
 {
@@ -117,17 +118,20 @@ void RaspPiGPIO::SetAsAlterateFunction( const int &pin, const int &alt )
 int RaspPiGPIO::GetState( const int &pin ) const
 {
 	
-	int r = *( m_gpio + ( pin / 10 ) ) >> ( ( pin % 10 ) * 3 );
-	int r2 = 0;
+	int r = *( m_gpio + ( pin / 10 ) );
 	
-	for ( int i = 0; i < 3; i++ )
+	for ( int j = 0; j < 10; j++ )
 	{
-		r2 = r % 2;
-		r2 <<= 1;
-		r /= 2;
+		for ( int i = 0; i < 3; i++ )
+		{
+			std::cout << (r % 2); 
+			r /= 2;
+		}
+		std::cout << "*";
 	}
+	std::cout << "\n";
 	
-	return r2;
+	return r;
 }
 
 // *(gpio.addr + 7) = 1 << pin
