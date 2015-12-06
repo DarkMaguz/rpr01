@@ -78,6 +78,9 @@ RaspPiGPIO::RaspPiGPIO()
 RaspPiGPIO::~RaspPiGPIO()
 {
 	
+	// Clear all GPIO's.
+	
+	
 	// Unmap I/O access.
 	munmap( (void *)m_gpio, BLOCK_SIZE );
 	//munmap( (unsigned *)m_pwm, BLOCK_SIZE );
@@ -109,6 +112,11 @@ void RaspPiGPIO::SetAsAlterateFunction( const int &pin, const int &alt )
 	// First we have to clear the register so we are sure that all 3 bits are zero.
 	SetAsInput( pin );
 	*( m_gpio + ( pin / 10 ) ) |= ( ( alt <= 3 ? alt + 4 : alt == 4 ? 3 : 2  ) << ( ( pin % 10 ) * 3 ) );
+}
+
+int RaspPiGPIO::GetState( const int &pin ) const
+{
+	return *( m_gpio + ( pin / 10 ) ) & ~( 7 << ( ( pin % 10 ) * 3 ) );
 }
 
 // *(gpio.addr + 7) = 1 << pin

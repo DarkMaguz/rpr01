@@ -26,9 +26,13 @@ int main( int argc, char **argv )
 	gpio.SetAsOutput( pin ); // GPIO4(PIN 7) sat som output pin
 	cout << "Færdig!" << endl;
 	
+	cout << gpio.GetState( 4 ) << endl;
+	
 	gpio.SetHigh( pin ); // Tænd for de røde LED
+	cout << gpio.GetState( 4 ) << endl;
 	sleep( 1 );
 	gpio.SetLow( pin ); // Sluk for de røde LED
+	cout << gpio.GetState( 4 ) << endl;
 	
 	cout << "Færdig!" << endl;
 	cout << "Afslutter programmet..." << endl;
