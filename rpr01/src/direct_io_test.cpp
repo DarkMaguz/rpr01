@@ -17,7 +17,7 @@
 // Access from ARM Running Linux
 #if PI_VERSION == 1
 #define BCM2708_PERI_BASE 0x20000000
-#else if PI_VERSION == 2
+#elif PI_VERSION == 2
 #define BCM2708_PERI_BASE 0x3F000000
 #endif
 

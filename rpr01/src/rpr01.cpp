@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include <unistd.h>
+
+#include "RpIO.h"
 #include "GPIO.h"
 
 using namespace std;
@@ -17,29 +19,19 @@ using namespace std;
 int main( int argc, char **argv )
 {
 	
-	GPIO* gpio4 = new GPIO( "4" ); // Lav et nyt GPIO object med tilknytning til GPIO4(PIN 7) den røde LED
-	
-	cout << "Eksportere GPIO pins... ";
-	cout.flush();
-	gpio4->export_gpio(); // Eksporter GPIO4(PIN 7)
-	cout << "Færdig!" << endl;
+	GPIO gpio; // Lav et nyt GPIO object med tilknytning til GPIO4(PIN 7) den røde LED
+	const int pin = 7;
 	
 	cout << "Sætter GPIO pin retningen... ";
 	cout.flush();
-	gpio4->setdir_gpio( "out" ); // GPIO4(PIN 7) sat som output pin
+	gpio.SetAsOutput( pin ); // GPIO4(PIN 7) sat som output pin
 	cout << "Færdig!" << endl;
 	
-	gpio4->setval_gpio( "1" ); // Tænd for de røde LED
+	gpio.SetHigh( pin ); // Tænd for de røde LED
 	sleep( 3 );
-	gpio4->setval_gpio( "0" ); // Sluk for de røde LED
+	gpio.SetLow( pin ); // Sluk for de røde LED
 	
-	cout << "Afeksportere GPIO pins... ";
-	cout.flush();
-	gpio4->unexport_gpio(); //Afeksporter GPIO4(PIN 7)
 	cout << "Færdig!" << endl;
-	
-	delete gpio4;
-	
 	cout << "Afslutter programmet..." << endl;
 	
 	return 0;
