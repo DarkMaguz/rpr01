@@ -17,7 +17,7 @@ int main( int argc, char **argv )
 	
 	RaspPiGPIO gpio; // Lav et nyt GPIO object.
 	
-	int pin1 = 18;
+	int pin1 = 17;
 	
 	gpio.SetAsOutput( pin1 );
 	//gpio.SetAsOutput( pin2 );
