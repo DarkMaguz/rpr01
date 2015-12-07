@@ -1,11 +1,8 @@
 /*
- ============================================================================
- Name        : rpr01.cpp
- Author      : me
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C++,
- ============================================================================
+ * blink.cpp
+ *
+ *  Created on: 07/12/2015
+ *      Author: magnus
  */
 
 #include <iostream>
@@ -18,25 +15,16 @@ using namespace std;
 int main( int argc, char **argv )
 {
 	
-	RaspPiGPIO gpio; // Lav et nyt GPIO object med tilknytning til GPIO4(PIN 7) den røde LED
-	const int pin = 4;
+	RaspPiGPIO gpio; // Lav et nyt GPIO object.
 	
-	cout << "Sætter GPIO pin retningen... ";
-	cout.flush();
-	cout << gpio.GetState( 4 ) << endl;
-	gpio.SetAsOutput( pin ); // GPIO4(PIN 7) sat som output pin
-	cout << "Færdig!" << endl;
+	gpio.SetAsOutput( 17 );
+	gpio.SetAsOutput( 18 );
 	
-	cout << gpio.GetState( 4 ) << endl;
+	gpio.SetHigh( 17 );
 	
-	gpio.SetHigh( pin ); // Tænd for de røde LED
-	cout << gpio.GetState( 4 ) << endl;
-	sleep( 1 );
-	gpio.SetLow( pin ); // Sluk for de røde LED
-	cout << gpio.GetState( 4 ) << endl;
+	sleep( 2 );
 	
-	cout << "Færdig!" << endl;
-	cout << "Afslutter programmet..." << endl;
+	gpio.SetLow( 17 );
 	
 	return 0;
 	
