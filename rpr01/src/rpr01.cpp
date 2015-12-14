@@ -32,9 +32,13 @@ void KeyPressed( int c, void *data )
 			cout << "kør tilbage.";
 			break;
 		case 'a': // Drej til venstre.
+			gpio->SetHigh( 18 );
+			gpio->SetHigh( 22 );
 			cout << "drej til venstre.";
 			break;
 		case 'd': // Drej til højre.
+			gpio->SetHigh( 17 );
+			gpio->SetHigh( 23 );
 			cout << "drej til højre.";
 			break;
 			
@@ -51,11 +55,11 @@ void keyReleased( int c, void *data )
 	
 	RaspPiGPIO *gpio = (RaspPiGPIO *)data;
 	
-	// Efter som vi ikke ved hvilken motor der gør hvad så lukker vi bare for alle udgange.
-	gpio->SetLow( 17 );
-	gpio->SetLow( 18 );
-	gpio->SetLow( 22 );
-	gpio->SetLow( 23 );
+	// Efter som vi ikke ved hvilken motor der gør hvad LIGE NU, så slukker vi bare for alle udgange.
+	gpio->SetLow( 17 ); // Venstre motor 1.
+	gpio->SetLow( 18 ); // Venstre motor 2.
+	gpio->SetLow( 22 ); // Højre motor 1.
+	gpio->SetLow( 23 ); // Højre motor 2.
 	
 	cout  << "Stop" << endl;
 	
