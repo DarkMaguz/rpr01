@@ -70,7 +70,9 @@ int main( int argc, char **argv )
 	
 	while ( 1 )
 	{
+		
 		int c = tio.GetChar();
+		
 		if ( c == 27 )
 			break;
 		
