@@ -9,6 +9,9 @@
 #include <cstdio>
 #include <cstdlib>
 #include <termio.h>
+#include <sys/time.h>
+#include <unistd.h>
+#include <ctime>
 
 using namespace std;
 
@@ -43,8 +46,8 @@ int tty_raw( int fd )
 	buf.c_oflag &= ~( OPOST );
 	/* output processing off */
 
-	buf.c_cc[VMIN] = 1; /* 1 byte at a time */
-	buf.c_cc[VTIME] = 0; /* no timer on input */
+	buf.c_cc[VMIN] = 0; /* 1 byte at a time */
+	buf.c_cc[VTIME] = 2; /* no timer on input */
 	
 	if ( tcsetattr( fd, TCSAFLUSH, &buf ) < 0 )
 		return -1;
@@ -67,19 +70,53 @@ int tty_reset( int fd )
 int getch( void )
 {
 	
+	static int keyPressed = 0;
+	
+	struct timeval start, end;
+	
+	long mtime, seconds, useconds;
+	
 	if ( tty_raw( fileno(stdin) ) )
 	{
 		std::cout << "Error: Raw mode failed!" << std::endl;
 		return -1;
 	}
 	
+	gettimeofday( &start, NULL );
+	
 	int c = fgetc( stdin );
+	
+	gettimeofday( &end, NULL );
+	
+	seconds = end.tv_sec - start.tv_sec;
+	useconds = end.tv_usec - start.tv_usec;
+	
+	mtime = seconds * 1000 + useconds / 1000.0;
 	
 	if ( tty_reset( fileno(stdin) ) )
 	{
 		std::cout << "Error: Raw mode reset failed!" << std::endl;
 		return -1;
 	}
+	
+	if ( mtime < 100 ) // Vent i 100 millisekunder.
+	{
+		if ( !keyPressed )
+		{
+			cout << "KeyPressed!" << endl;
+			keyPressed++;
+		}
+	}
+	else
+	{
+		if ( keyPressed )
+		{
+			cout << "KeyReleased!" << endl;
+			keyPressed--;
+		}
+	}
+	
+	//cout << "Elapsed time: " << mtime << " milliseconds!" << endl;
 	
 	return c;
 	
@@ -97,11 +134,13 @@ int main( int argc, char **argv )
 		
 		int c = getch();
 		
-		//std::cout << "You pressed: " << c  << std::endl;
+		std::cout << "You pressed: " << c  << std::endl;
 		
 		if ( c == 27 )
 			break;
+		
 		i++;
+		
 	}
 	
 	std::cout << "You pressed a key " << i  << " times." << std::endl;

@@ -1,9 +1,9 @@
 bin_PROGRAMS = rpr01 direct test01
 
-rpr01_SOURCES = rpr01.cpp RaspPiGPIO.cpp
-rpr01_CPPFLAGS = -D_GNU_SOURCE
+rpr01_SOURCES = rpr01.cpp RaspPiGPIO.cpp TermIO.cpp
+rpr01_CPPFLAGS = -D_GNU_SOURCE -std=c++11
 # -D_GNU_SOURCE
-rpr01_LDADD = -lncurses -ltinfo
+rpr01_LDADD = -lncurses -ltinfo -lpthread
 # -lSDL2
 # -lncurses -ltinfo
 
