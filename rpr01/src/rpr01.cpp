@@ -23,12 +23,12 @@ void KeyPressed( int c, void *data )
 	{
 		case 'w': // Kør frem.
 			gpio->SetHigh( 17 );
-			gpio->SetHigh( 22 );
+			//gpio->SetHigh( 22 );
 			cout << "kør frem.";
 			break;
 		case 's': // Kør tilbage.
 			gpio->SetHigh( 18 );
-			gpio->SetHigh( 23 );
+			//gpio->SetHigh( 23 );
 			cout << "kør tilbage.";
 			break;
 		case 'a': // Drej til venstre.
