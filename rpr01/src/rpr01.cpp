@@ -28,7 +28,6 @@ void KeyPressed( int c, void *data )
 			break;
 		case 's': // Kør tilbage.
 			gpio->SetHigh( 18 );
-			gpio->SetHigh( 17 );
 			//gpio->SetHigh( 23 );
 			cout << "kør tilbage.";
 			break;
