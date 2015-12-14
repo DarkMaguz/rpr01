@@ -66,6 +66,11 @@ int main( int argc, char **argv )
 	
 	RaspPiGPIO gpio; // Lav et nyt GPIO object.
 	
+	gpio.SetAsOutput( 17 );
+	gpio.SetAsOutput( 18 );
+	gpio.SetAsOutput( 22 );
+	gpio.SetAsOutput( 23 );
+	
 	TermIO tio( &KeyPressed, &keyReleased, (void *)&gpio );
 	
 	while ( 1 )
