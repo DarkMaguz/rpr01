@@ -30,13 +30,15 @@
 #include <unistd.h>
 #include <iostream>
 
+using namespace std;
+
 RaspPiGPIO::RaspPiGPIO()
 {
 	
-	// Open /dev/mem.
+	// Åben /dev/mem.
 	if ( ( m_mem_fd = open( "/dev/mem", O_RDWR | O_SYNC ) ) < 0 )
 	{
-		printf( "can't open /dev/mem \n" );
+		cout << "Kan ikke åbne \"/dev/mem\", har du de rigtige rettighedder?" << endl;
 		exit( -1 );
 	}
 	
@@ -64,7 +66,7 @@ RaspPiGPIO::RaspPiGPIO()
 //	PROT_READ | PROT_WRITE, 	// Enable reading & writting to mapped memory
 //	MAP_SHARED, 							//Shared with other processes
 //	m_mem_fd, 									//File to map
-//	GPIO_PWM 								//Offset to GPIO peripheral
+//	GPIO_PWM 								//Offset to GPIO PWM peripheral
 //	);
 //	
 //	// Test for failure.
@@ -79,8 +81,9 @@ RaspPiGPIO::RaspPiGPIO()
 RaspPiGPIO::~RaspPiGPIO()
 {
 	
-	// Clear all GPIO's.
-	
+	// Ryd alle GPIO's.
+	// TODO Find en måde og nulstille alle ind/ud og deres respektive værdier.
+	// Find ud af om det overhoved er noget vi bør bekymer os om.
 	
 	// Unmap I/O access.
 	munmap( (void *)m_gpio, BLOCK_SIZE );
